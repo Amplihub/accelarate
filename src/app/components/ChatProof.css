@@ -5,15 +5,22 @@
    the dark reference is the edge-fade technique itself (also used on
    the video testimonial carousel) — applied here as a mask on the
    image so its edges dissolve into the page rather than ending in a
-   hard rectangular cutoff. Everything else — the light background,
-   the soft blue glow behind it — is native to this theme.
+   hard rectangular cutoff. The section background is a radial gradient
+   (set inline in ChatProof.tsx) that does what a per-image glow used
+   to; everything else is native to this theme.
 ───────────────────────────────────────────────────────────────── */
 
 .cpf-stage {
   position: relative;
   display: flex;
   justify-content: center;
-  padding: 48px 0 32px;
+  padding: 24px 0 16px;
+}
+
+@media (max-width: 640px) {
+  .cpf-stage {
+    padding: 16px 0 8px;
+  }
 }
 
 /* Centerpiece sizing — no width cap of its own beyond the section's
@@ -22,24 +29,6 @@
 .cpf-frame {
   position: relative;
   width: 100%;
-}
-
-/* Soft radial glow behind the image — bigger than the frame itself so
-   it reads as ambient light, not a bounded panel. A blurred rectangle
-   here would just be a second hard edge behind the first; a glow has
-   none to begin with. Strengthened over the first pass so the image
-   reads as lit/spotlighted rather than sitting on a plain background. */
-.cpf-glow {
-  position: absolute;
-  inset: -20% -14%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(26, 86, 219, 0.34) 0%,
-    rgba(26, 86, 219, 0.16) 42%,
-    rgba(26, 86, 219, 0) 78%
-  );
-  z-index: 0;
-  pointer-events: none;
 }
 
 .cpf-image {
@@ -52,10 +41,12 @@
   transform-origin: center;
   /* Vignette mask — center stays fully opaque, edges dissolve to
      transparent so the glow shows through instead of a hard crop.
-     Unchanged from the first pass — this is the one thing kept
-     exactly as-is per the brief. */
-  -webkit-mask-image: radial-gradient(ellipse 78% 78% at 50% 50%, #000 56%, transparent 100%);
-  mask-image: radial-gradient(ellipse 78% 78% at 50% 50%, #000 56%, transparent 100%);
+     Widened from a 2-stop (56%→100%) to a 4-stop fade: the old version
+     held near-full opacity right up to 56% then dropped off sharply,
+     which read as a visible ring/edge rather than a gradual dissolve —
+     especially against the screenshot's own opaque dark background. */
+  -webkit-mask-image: radial-gradient(ellipse 82% 82% at 50% 50%, #000 30%, rgba(0,0,0,0.75) 52%, rgba(0,0,0,0.25) 78%, transparent 100%);
+  mask-image: radial-gradient(ellipse 82% 82% at 50% 50%, #000 30%, rgba(0,0,0,0.75) 52%, rgba(0,0,0,0.25) 78%, transparent 100%);
   /* drop-shadow (not box-shadow) so the shadow follows the masked
      alpha shape — a box-shadow would draw a hard rectangle behind a
      softly-faded image, which defeats the point of the mask. Deeper
@@ -73,4 +64,42 @@
 
 @media (prefers-reduced-motion: reduce) {
   .cpf-image { animation: none; }
+}
+
+/* ── Mobile stack — same fade language as the desktop image, applied to
+   a vertical column of separate screenshots instead of one. ── */
+.cpf-stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  transform-origin: center;
+  animation: cpfBreathe 7s ease-in-out infinite;
+}
+
+.cpf-stack-img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  filter: drop-shadow(0 10px 22px rgba(17, 17, 17, 0.14));
+}
+
+/* Only the outer edges of the group dissolve — middle images stay
+   fully opaque rectangles, matching the "no individual fades" spec. */
+.cpf-stack-img--first {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 100%);
+}
+
+.cpf-stack-img--last {
+  -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 16%, #000 100%);
+  mask-image: linear-gradient(to top, transparent 0%, #000 16%, #000 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cpf-stack { animation: none; }
 }
