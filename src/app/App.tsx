@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import PillNav from "./components/PillNav";
+import ChatProof from "./components/ChatProof";
+import Testimonials from "./components/Testimonials";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./components/ui/accordion";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -542,7 +544,7 @@ const FAQS = [
 
 function Section6FAQ() {
   return (
-    <section id="faq" className="border-t border-border bg-[#FAFAFA]" style={{ scrollMarginTop: 110 }}>
+    <section id="faq" className="border-t border-border bg-[#EAF1FF]" style={{ scrollMarginTop: 110 }}>
       <div className="max-w-[800px] mx-auto pt-[80px] pb-[80px] px-6">
         
         {/* Eyebrow */}
@@ -1275,8 +1277,8 @@ export default function App() {
           The most <Highlight>measurable</Highlight> guarantee in content marketing.
         </p>
 
-        {/* Primary CTA — same button system as the closing CTA in Section 7,
-            wired to the booking section rather than being a dead button. */}
+        {/* Primary CTA (Book a Call) temporarily commented out */}
+        {/*
         <div className="flex justify-center mb-8 sm:mb-10" ref={heroCtaRef}>
           <a
             href="#contact"
@@ -1302,7 +1304,6 @@ export default function App() {
               e.currentTarget.style.boxShadow = "0 10px 28px rgba(26,86,219,0.28)";
             }}
           >
-            {/* left ghost spacer = same width as arrow circle to optically center the text */}
             <span style={{ width: 34, height: 34, flexShrink: 0 }} aria-hidden="true" />
             <span className="flex-1 text-center">Book a Call</span>
             <span
@@ -1314,6 +1315,46 @@ export default function App() {
               </svg>
             </span>
           </a>
+        </div>
+        */}
+
+        {/* VSL Placeholder Block */}
+        <div className="flex justify-center w-full mb-8 sm:mb-10" ref={heroCtaRef}>
+          <div
+            className="relative flex flex-col items-center justify-center w-full max-w-[700px] aspect-video"
+            style={{
+              backgroundColor: "#1a1a1a",
+              borderRadius: "16px",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
+            }}
+          >
+            {/* Play Button */}
+            <div
+              className="flex items-center justify-center rounded-full"
+              style={{
+                width: "70px",
+                height: "70px",
+                backgroundColor: "#1A56DB",
+                boxShadow: "0 8px 20px rgba(26,86,219,0.4)",
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ marginLeft: "4px" }}>
+                <path d="M5 3L19 12L5 21V3Z" fill="#ffffff" />
+              </svg>
+            </div>
+
+            {/* Placeholder Label Text */}
+            <span
+              className="absolute bottom-4 text-center font-sans font-medium"
+              style={{
+                color: "#9CA3AF",
+                fontSize: "13px",
+                letterSpacing: "0.02em"
+              }}
+            >
+              Watch How It Works
+            </span>
+          </div>
         </div>
 
         {/* Social proof — no container, avatars + text sit directly on the page.
@@ -1694,6 +1735,13 @@ export default function App() {
         {/* ── Section 5B: Full Case Study Library ── */}
         <Section5B />
       </div>
+
+      {/* ── Section 5C: Chat Proof — "The Receipts" screenshot wall ── */}
+      {/* Temporarily removed from the page — component kept intact for later use. */}
+      {/* <ChatProof /> */}
+
+      {/* ── Section 5D: Testimonials — video carousel + written reviews ── */}
+      <Testimonials />
 
       {/* ── Section 6: FAQ ── */}
       <Section6FAQ />
