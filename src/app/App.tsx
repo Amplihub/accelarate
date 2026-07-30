@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import PillNav from "./components/PillNav";
-import ChatProof from "./components/ChatProof";
 import Testimonials from "./components/Testimonials";
 import Threads from "./components/Threads";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./components/ui/accordion";
@@ -1152,7 +1151,6 @@ export default function App() {
   const heroLine2Ref = useRef<HTMLSpanElement>(null);
   const heroGuaranteedRef = useRef<HTMLSpanElement>(null);
   const heroMoneyBackRef = useRef<HTMLDivElement>(null);
-  const heroTaglineRef = useRef<HTMLParagraphElement>(null);
   const heroCtaRef = useRef<HTMLDivElement>(null);
   const heroSocialProofRef = useRef<HTMLDivElement>(null);
 
@@ -1185,7 +1183,7 @@ export default function App() {
           { scale: 1.05, duration: 0.22, ease: EASE }
         )
         .to(heroGuaranteedRef.current, { scale: 1, duration: 0.18, ease: EASE })
-        .from([heroMoneyBackRef.current, heroTaglineRef.current], { opacity: 0, y: 16, duration: 0.6 }, "-=0.05")
+        .from(heroMoneyBackRef.current, { opacity: 0, y: 16, duration: 0.6 }, "-=0.05")
         .from(heroCtaRef.current, { opacity: 0, y: 16, duration: 0.6 }, "-=0.35")
         .from(heroSocialProofRef.current, { opacity: 0, y: 16, duration: 0.6 }, "-=0.35");
 
@@ -1341,16 +1339,6 @@ export default function App() {
             Or Your Money Back.
           </p>
         </div>
-
-        {/* nowrap only from sm up — on a phone the single line was wider than
-            the viewport, and was what forced the page to scroll sideways. */}
-        <p
-          ref={heroTaglineRef}
-          className="text-muted-foreground font-normal mb-5 sm:mb-7 mx-auto leading-relaxed whitespace-normal sm:whitespace-nowrap"
-          style={{ fontSize: "clamp(13px, 1.4vw, 17px)" }}
-        >
-          The most <Highlight>measurable</Highlight> guarantee in content marketing.
-        </p>
 
         {/* Primary CTA — same button system as the closing CTA in Section 7,
             wired to the booking section rather than being a dead button. */}
@@ -1862,12 +1850,6 @@ export default function App() {
         {/* ── Section 5B: Full Case Study Library ── */}
         <Section5B />
       </div>
-
-      {/* ── Section 5C: Chat Proof — "The Receipts" screenshot wall ── */}
-      <ChatProof />
-
-      {/* ChatProof and Testimonials both read as white at the seam. */}
-      <SectionBreak topColor="#ffffff" bottomColor="#ffffff" />
 
       {/* ── Section 5D: Testimonials — video carousel + written reviews ── */}
       <Testimonials />
