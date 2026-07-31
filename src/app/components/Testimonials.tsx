@@ -36,6 +36,24 @@ type VideoTestimonial = {
 
 const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
   {
+    name: "Robert Herjavec",
+    role: "@SharkTank",
+    video: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/691181d0c3a1ea5c0423b2f2.mp4",
+    poster: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/68e0ce34b0f3d8cdc4217b87.png",
+  },
+  {
+    name: "Maxine Horne",
+    role: "CEO, Vita Group",
+    video: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/697b0f891543e6a3417649a0.mp4",
+    poster: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/697b28f204b05b401843bd7b.png",
+  },
+  {
+    name: "Daniel Trkulja",
+    role: "Founder, ThreadLabs",
+    video: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/68e73867468f553fc2b095ce.mp4",
+    poster: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/68e69669d855cfce7f3078e8.png",
+  },
+  {
     name: "Vajira Weerasekera",
     role: "Founder, Veritas Human Edge",
     video: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/6a3954d721502f4c61ef9a94.mp4",
@@ -46,24 +64,6 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     role: "Founder & CEO, InvestorKit",
     video: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/6a2f6b8ad7e5b817778d7231.mp4",
     // No poster in the source — falls back to the neutral placeholder.
-  },
-  {
-    name: "Robert Herjavec",
-    role: "@SharkTank",
-    video: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/691181d0c3a1ea5c0423b2f2.mp4",
-    poster: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/68e0ce34b0f3d8cdc4217b87.png",
-  },
-  {
-    name: "Daniel Trkulja",
-    role: "Founder, ThreadLabs",
-    video: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/68e73867468f553fc2b095ce.mp4",
-    poster: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/68e69669d855cfce7f3078e8.png",
-  },
-  {
-    name: "Maxine Horne",
-    role: "CEO, Vita Group",
-    video: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/697b0f891543e6a3417649a0.mp4",
-    poster: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/697b28f204b05b401843bd7b.png",
   },
   {
     name: "Kaushi Gunasekera",
@@ -288,6 +288,7 @@ function VideoCarousel() {
           slidesPerView="auto"
           centeredSlides
           loop
+          initialSlide={1}
           spaceBetween={18}
           speed={550}
           autoplay={prefersReducedMotion() ? false : { delay: 4200, disableOnInteraction: false }}
