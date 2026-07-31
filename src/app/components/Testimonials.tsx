@@ -66,6 +66,12 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     poster: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/697b28f204b05b401843bd7b.png",
   },
   {
+    name: "Kaushi Gunasekera",
+    role: "CEO, mortgagepremiers",
+    video: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/69e0ecc18696a78b8d5462a9.mov",
+    poster: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/69e0ee6f83b092a6c7ac1b16.jpg",
+  },
+  {
     name: "Shaveen Bandaranayake",
     role: "Founder, TheLawSimplified",
     video: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/69217880a6ad080aaed33340.mp4",
@@ -76,12 +82,6 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
     role: "CEO, Concolabs",
     video: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/68e73867468f55d622b095cc.mp4",
     poster: "https://storage.googleapis.com/msgsndr/0JdcK8nm75u9Gb745fHy/media/68dfcb0d94a323597bb79f5e.png",
-  },
-  {
-    name: "Kaushi Gunasekera",
-    role: "CEO, mortgagepremiers",
-    video: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/69e0ecc18696a78b8d5462a9.mov",
-    poster: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/69e0ee6f83b092a6c7ac1b16.jpg",
   },
   {
     name: "Roshini Marasinghe",
@@ -98,9 +98,7 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
    needs a read-through by whoever owns the client relationship
    before this ships. Substituted spots are flagged inline.
 
-   ⚠️ DEV NOTE — no profile photo URLs came through with the source.
-   Each entry falls back to a brand-tinted initials tile; drop the
-   real image URL into `photo` to replace it. */
+   Falls back to a brand-tinted initials tile if `photo` is unset. */
 type TextTestimonial = {
   name: string;
   company: string;
@@ -117,6 +115,7 @@ const TEXT_TESTIMONIALS: TextTestimonial[] = [
     // "Chali and the team at Editoz Club" → "Accelerate"
     quote:
       "It has been a pleasure partnering with Accelerate and the team. Their entrepreneurial spirit and commitment to ambitious goals are evident in everything they do — but what sets them apart is their ability to translate brand values into short-form content that travels. They have played a meaningful role in jump-starting our social media growth, and we are glad to count them as an extension of our team.",
+    photo: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/6a2f6b7a585d2f7daeef8267.png",
   },
   {
     name: "Maxine Horne",
@@ -125,6 +124,7 @@ const TEXT_TESTIMONIALS: TextTestimonial[] = [
     // "Editoz Club" → "Accelerate"
     quote:
       "When it comes to personal branding services, I always work with the team at Accelerate. I've found them to be professional, understanding, and highly responsive... Nothing is ever too much trouble for the team.",
+    photo: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/69cb87c711768934da6d91b7.png",
   },
   {
     name: "Kenny Lee",
@@ -133,6 +133,7 @@ const TEXT_TESTIMONIALS: TextTestimonial[] = [
     // "Editoz Club" → "Accelerate"
     quote:
       "Accelerate has been a game-changer in growing my following with their superb content creation support. Their knack for bringing ideas to life and managing projects is exceptional. The communication and teamwork are top-notch, making the whole process smooth and effective.",
+    photo: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/69cb87c71176895c6b6d91b6.png",
   },
   {
     name: "Daniel Trkulja",
@@ -140,6 +141,7 @@ const TEXT_TESTIMONIALS: TextTestimonial[] = [
     title: "It's been a fantastic experience",
     quote:
       "I'd be more than happy to give a case study because you've been such an incredible help to me, from the moment we engaged to building that brand identity. Being connected with the team, the communication, and the extra mile you've taken have been incredibly helpful and invaluable for me, especially as someone completely new to this. For anyone considering it, I'd happily recommend you. It's been a fantastic experience.",
+    photo: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/69cb87c7117689dcd96d91b9.png",
   },
   {
     name: "Shaveen Bandaranayake",
@@ -147,6 +149,7 @@ const TEXT_TESTIMONIALS: TextTestimonial[] = [
     title: "The result was real growth",
     quote:
       "I have to say, I'm very impressed, not just by the competence and diligence the team has, but how insightful and thoughtful they are in providing custom-made solutions in terms of social media promotions, strategy, and various techniques, even in relation to production.",
+    photo: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/69cb87c7eab445763d66f66a.png",
   },
   {
     name: "Alejandra Lopez",
@@ -155,6 +158,7 @@ const TEXT_TESTIMONIALS: TextTestimonial[] = [
     // "Editoz Club" → "Accelerate" (twice)
     quote:
       "Before joining Accelerate, I wanted to grow on social media but lacked the confidence and clarity to put myself out there... Today, I feel comfortable recording videos, sharing my thoughts online, and putting myself out there with confidence. I'd highly recommend Accelerate to anyone looking to build confidence, develop their personal brand, and create content consistently.",
+    photo: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/6a2f76b30a683b64fe365fe7.jpg",
   },
   {
     name: "Ishini Saparamadu",
@@ -162,6 +166,7 @@ const TEXT_TESTIMONIALS: TextTestimonial[] = [
     title: "The result was real growth",
     quote:
       "Before joining Accelerate, I didn't use social media in a structured way. What stood out was how the team took the time to understand our industry before creating content, refining every detail before publishing. The result was real growth, not just numbers, with strong reach, new leads, and valuable professional connections.",
+    photo: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/69cb87c71176891b6f6d91ba.png",
   },
 ];
 
