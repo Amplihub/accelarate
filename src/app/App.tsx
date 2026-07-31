@@ -200,7 +200,7 @@ const CASE_STUDIES = [
     stats: [
       { value: "1M+", label: "Followers" },
       { value: "20M+", label: "Views" },
-      { value: "16M+", label: "Impressions/mo" },
+      { value: "$10M+", label: "Revenue" },
     ],
   },
   {
@@ -924,10 +924,6 @@ function Section5A() {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const slide = (dir: 1 | -1) => {
-    trackRef.current?.scrollBy({ left: dir * 374, behavior: "smooth" });
-  };
-
   useEffect(() => {
     if (prefersReducedMotion()) return;
     const ctx = gsap.context(() => {
@@ -947,7 +943,7 @@ function Section5A() {
 
   return (
     <section id="case-studies" style={{ backgroundColor: "transparent", scrollMarginTop: 110 }}>
-      <div className="max-w-[1200px] mx-auto pt-1 md:pt-2 pb-4 md:pb-5">
+      <div className="max-w-[1440px] mx-auto pt-1 md:pt-2 pb-4 md:pb-5">
 
         {/* Eyebrow — outlined pill, matches reference "CUSTOMER REVIEWS" style */}
         <div className="flex justify-center mb-2 px-6">
@@ -967,166 +963,108 @@ function Section5A() {
           Real Campaigns, Real Growth
         </h2>
 
-        {/* ── Carousel track ── */}
-        <div className="relative">
-          {/* Left / right fade masks — desktop only. On mobile each slide already
-              fills the viewport edge-to-edge with matched gap/padding below, so
-              there's no adjacent card sliver for a fade to mask. */}
-          <div className="hidden sm:block pointer-events-none absolute left-0 top-0 bottom-0 w-12 z-10"
-            style={{
-              backdropFilter: "blur(6px)",
-              WebkitBackdropFilter: "blur(6px)",
-              maskImage: "linear-gradient(to right, black, transparent)",
-              WebkitMaskImage: "linear-gradient(to right, black, transparent)",
-            }} />
-          <div className="hidden sm:block pointer-events-none absolute left-0 top-0 bottom-0 w-12 z-10"
-            style={{ background: "linear-gradient(to right, #ffffff, transparent)" }} />
-          <div className="hidden sm:block pointer-events-none absolute right-0 top-0 bottom-0 w-16 z-10"
-            style={{
-              backdropFilter: "blur(6px)",
-              WebkitBackdropFilter: "blur(6px)",
-              maskImage: "linear-gradient(to left, black, transparent)",
-              WebkitMaskImage: "linear-gradient(to left, black, transparent)",
-            }} />
-          <div className="hidden sm:block pointer-events-none absolute right-0 top-0 bottom-0 w-16 z-10"
-            style={{ background: "linear-gradient(to left, #ffffff, transparent)" }} />
+        {/* ── Cards — all three shown at once, no carousel/scroll. ── */}
+        <div
+          ref={trackRef}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-5 sm:px-8"
+        >
+          {CASE_STUDIES.map((cs, i) => (
+            <div
+              key={i}
+              ref={(el) => { cardRefs.current[i] = el; }}
+              className="flex flex-col sm:flex-row gap-3.5 w-full"
+            >
 
-          {/* Scrollable row — on mobile, gap and padding are equal (20px) so the
-              next slide's edge lands exactly at the viewport boundary, never peeking in. */}
-          <div
-            ref={trackRef}
-            className="flex gap-5 sm:gap-[14px] overflow-x-auto px-5 sm:px-6"
-            style={{
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-              scrollSnapType: "x mandatory",
-              WebkitOverflowScrolling: "touch",
-            }}
-          >
-            {CASE_STUDIES.map((cs, i) => (
-              <div
-                key={i}
-                ref={(el) => { cardRefs.current[i] = el; }}
-                className="flex flex-col sm:flex-row gap-[14px] w-[calc(100vw-40px)] sm:w-auto shrink-0 snap-center sm:snap-start"
+              {/* ── Video thumbnail — portrait, links out to the Instagram reel. ── */}
+              <a
+                href={cs.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Watch ${cs.name}'s reel on Instagram`}
+                className="group relative w-full aspect-[9/16] sm:w-[150px] sm:aspect-auto sm:h-[268px] shrink-0 overflow-hidden block bg-[#E5E9F0]"
+                style={{ borderRadius: "14px" }}
               >
-
-                {/* ── Video thumbnail — portrait, links out to the Instagram reel. ── */}
-                <a
-                  href={cs.videoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Watch ${cs.name}'s reel on Instagram`}
-                  className="group relative w-full aspect-[9/16] sm:w-[150px] sm:aspect-auto sm:h-[310px] shrink-0 overflow-hidden block bg-[#E5E9F0]"
-                  style={{ borderRadius: "16px" }}
-                >
-                  <img
-                    src={cs.thumbnail}
-                    alt={`${cs.name}'s reel thumbnail`}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{ background: "linear-gradient(to top, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 45%)" }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span
-                      className="flex items-center justify-center rounded-full bg-white group-hover:scale-105 transition-transform duration-200"
-                      style={{ width: 44, height: 44, boxShadow: "0 2px 10px rgba(17,17,17,0.14)" }}
-                    >
-                      <svg width="14" height="16" viewBox="0 0 10 12" fill="none" style={{ marginLeft: 2 }}>
-                        <path d="M0.5 1.2v9.6L9 6 0.5 1.2Z" fill="#1A56DB" />
-                      </svg>
-                    </span>
-                  </div>
-                </a>
-
-                {/* ── Info card ── */}
+                <img
+                  src={cs.thumbnail}
+                  alt={`${cs.name}'s reel thumbnail`}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
                 <div
-                  className="w-full sm:w-[300px] sm:h-[310px] shrink-0 bg-white flex flex-col"
-                  style={{
-                    borderRadius: "16px",
-                    border: "1px solid #EFEFEF",
-                    padding: "22px 22px 20px",
-                  }}
-                >
-                  {/* Header row — avatar, name, and role/company. */}
-                  <div className="flex items-center gap-2.5 mb-4">
-                    <img
-                      src={cs.avatar}
-                      alt={cs.name}
-                      className="shrink-0 rounded-full object-cover"
-                      style={{ width: 40, height: 40, border: "2px solid #fff", boxShadow: "0 1px 4px rgba(0,0,0,0.10)" }}
-                    />
-                    <div>
-                      <p className="font-bold text-[#111111] leading-tight" style={{ fontSize: "14.5px" }}>
-                        {cs.name}
-                      </p>
-                      <p className="text-[#5B5F66] mt-0.5" style={{ fontSize: "12px" }}>
-                        {cs.role}
-                      </p>
-                    </div>
-                  </div>
+                  className="absolute inset-0"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0) 45%)" }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span
+                    className="flex items-center justify-center rounded-full bg-white group-hover:scale-105 transition-transform duration-200"
+                    style={{ width: 42, height: 42, boxShadow: "0 2px 10px rgba(17,17,17,0.14)" }}
+                  >
+                    <svg width="14" height="16" viewBox="0 0 10 12" fill="none" style={{ marginLeft: 2 }}>
+                      <path d="M0.5 1.2v9.6L9 6 0.5 1.2Z" fill="#1A56DB" />
+                    </svg>
+                  </span>
+                </div>
+              </a>
 
-                  {/* Before / What we built */}
-                  <div className="flex flex-col gap-3 flex-1 overflow-hidden">
-                    <div>
-                      <p className="font-bold text-[#111111]" style={{ fontSize: "12.5px" }}>Before</p>
-                      <p className="text-[#5B5F66] leading-relaxed mt-1" style={{ fontSize: "13px" }}>
-                        {cs.before}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="font-bold text-[#1A56DB]" style={{ fontSize: "12.5px" }}>What we built</p>
-                      <p className="text-[#5B5F66] leading-relaxed mt-1" style={{ fontSize: "13px" }}>
-                        {cs.built}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Stats — all 3 shown */}
-                  <div className="flex justify-between gap-3 pt-4 mt-3" style={{ borderTop: "1px solid #F2F2F2" }}>
-                  {cs.stats.map((stat, idx) => (
-                    <div key={idx}>
-                      <p style={{ fontSize: "21px", lineHeight: 1.1, color: "#1A56DB", fontWeight: 700 }}>
-                        {stat.value}
-                      </p>
-                      <p className="text-[#5B5F66] mt-0.5" style={{ fontSize: "11px" }}>
-                        {stat.label}
-                      </p>
-                    </div>
-                  ))}
+              {/* ── Info card ── */}
+              <div
+                className="w-full sm:h-[268px] min-w-0 bg-white flex flex-col"
+                style={{
+                  borderRadius: "14px",
+                  border: "1px solid #EFEFEF",
+                  padding: "16px 16px 14px",
+                }}
+              >
+                {/* Header row — avatar, name, and role/company. */}
+                <div className="flex items-center gap-2 mb-3">
+                  <img
+                    src={cs.avatar}
+                    alt={cs.name}
+                    className="shrink-0 rounded-full object-cover"
+                    style={{ width: 34, height: 34, border: "2px solid #fff", boxShadow: "0 1px 4px rgba(0,0,0,0.10)" }}
+                  />
+                  <div className="min-w-0">
+                    <p className="font-bold text-[#111111] leading-tight truncate" style={{ fontSize: "13px" }}>
+                      {cs.name}
+                    </p>
+                    <p className="text-[#5B5F66] mt-0.5 truncate" style={{ fontSize: "11px" }}>
+                      {cs.role}
+                    </p>
                   </div>
                 </div>
 
-              </div>
-            ))}
-            {/* Right breathing room */}
-            <div className="shrink-0 w-4" aria-hidden="true" />
-          </div>
-        </div>
+                {/* Before / What we built */}
+                <div className="flex flex-col gap-2 flex-1 overflow-hidden">
+                  <div>
+                    <p className="font-bold text-[#111111]" style={{ fontSize: "11px" }}>Before</p>
+                    <p className="text-[#5B5F66] leading-relaxed mt-0.5" style={{ fontSize: "11.5px" }}>
+                      {cs.before}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-[#1A56DB]" style={{ fontSize: "11px" }}>What we built</p>
+                    <p className="text-[#5B5F66] leading-relaxed mt-0.5" style={{ fontSize: "11.5px" }}>
+                      {cs.built}
+                    </p>
+                  </div>
+                </div>
 
-        {/* ── Arrow navigation — centered below, matching reference ── */}
-        <div className="flex items-center justify-center gap-3 mt-8 px-6">
-          <button
-            onClick={() => slide(-1)}
-            aria-label="Previous"
-            className="flex items-center justify-center rounded-full border border-[#DCDCDC] bg-white hover:border-[#1A56DB] transition-colors duration-150"
-            style={{ width: 36, height: 36 }}
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M9 11L5 7L9 3" stroke="#111111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <button
-            onClick={() => slide(1)}
-            aria-label="Next"
-            className="flex items-center justify-center rounded-full border border-[#DCDCDC] bg-white hover:border-[#1A56DB] transition-colors duration-150"
-            style={{ width: 36, height: 36 }}
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M5 3L9 7L5 11" stroke="#111111" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
+                {/* Stats — all 3 shown */}
+                <div className="flex justify-between gap-2 pt-3 mt-2" style={{ borderTop: "1px solid #F2F2F2" }}>
+                {cs.stats.map((stat, idx) => (
+                  <div key={idx} className="min-w-0">
+                    <p className="truncate" style={{ fontSize: "16px", lineHeight: 1.1, color: "#1A56DB", fontWeight: 700 }}>
+                      {stat.value}
+                    </p>
+                    <p className="text-[#5B5F66] mt-0.5 truncate" style={{ fontSize: "10px" }}>
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+                </div>
+              </div>
+
+            </div>
+          ))}
         </div>
 
       </div>
