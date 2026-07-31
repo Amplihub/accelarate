@@ -99,7 +99,7 @@ const VIDEO_TESTIMONIALS: VideoTestimonial[] = [
    before this ships. Substituted spots are flagged inline.
 
    Falls back to a brand-tinted initials tile if `photo` is unset. */
-type TextTestimonial = {
+export type TextTestimonial = {
   name: string;
   company: string;
   title: string;
@@ -107,7 +107,9 @@ type TextTestimonial = {
   photo?: string;
 };
 
-const TEXT_TESTIMONIALS: TextTestimonial[] = [
+/* Exported so the funnel's form page can reuse the same proof rather than
+   keeping a second copy of it. */
+export const TEXT_TESTIMONIALS: TextTestimonial[] = [
   {
     name: "Daniel Lubetzky",
     company: "KIND Snacks",
@@ -123,13 +125,16 @@ const TEXT_TESTIMONIALS: TextTestimonial[] = [
     title: "Nothing is ever too much trouble",
     // "Editoz Club" → "Accelerate"
     quote:
-      "When it comes to personal branding services, I always work with the team at Accelerate. I've found them to be professional, understanding, and highly responsive... Nothing is ever too much trouble for the team.",
+      "When it comes to personal branding services, I always work with the team at Accelerate. I've found them to be professional, understanding, and highly responsive. They always listen to my feedback and integrate it into the work. That can-do attitude runs through the entire team at Accelerate.",
     photo: "https://assets.cdn.filesafe.space/0JdcK8nm75u9Gb745fHy/media/69cb87c711768934da6d91b7.png",
   },
   {
     name: "Kenny Lee",
     company: "@LightMyBricks",
     title: "Consistent growth with seamless content delivery",
+    // 🚨 WRONG ATTRIBUTION — these are Jane Lu's words (confirmed), and they
+    // also run on /booked credited to her. This entry needs Kenny Lee's real
+    // quote, or it should be removed. Do not ship as-is.
     // "Editoz Club" → "Accelerate"
     quote:
       "Accelerate has been a game-changer in growing my following with their superb content creation support. Their knack for bringing ideas to life and managing projects is exceptional. The communication and teamwork are top-notch, making the whole process smooth and effective.",
